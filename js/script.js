@@ -79,7 +79,14 @@ function getRandomQuote() {
 }
 
 console.log(getRandomQuote());
-
+//Code adapted from https://www.w3resource.com/javascript-exercises/javascript-math-exercise-40.php
+//Generates Random Color to be generated for use in changing background for each quote
+function randomColorChange(){
+  let r = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  return "rgb(" + r + ',' + b + ',' + g +")";
+}
 
 function printQuote() {
   let randomQuote = getRandomQuote();
@@ -103,17 +110,23 @@ function printQuote() {
   }
   //Closes the 'p' tag from orignally setting it with the source and turns the quote box inner html to the html string
   htmlString += "</p>"
+
+  //Stores variable so it can be used twice
+  let randomColor = randomColorChange();
+
+  //Changes BG Color for both background and quote loader box so that they match
+  document.body.style.backgroundColor = randomColor;
+  document.getElementById("loadQuote").style.backgroundColor = randomColor;
+
   document.getElementById("quote-box").innerHTML = htmlString;
 }
 
 //initializes the screen with a quote, so it doesn't start blank
 printQuote();
 
-/***
-  When the "Show another quote" button is clicked, the event listener
-  below will be triggered, and it will call, or "invoke", the `printQuote`
-  function. So do not make any changes to the line of code below this
-  comment.
-***/
+//Changes Quote and background color every 25 seconds
+setInterval(() => {
+  printQuote()
+}, 25000);
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
