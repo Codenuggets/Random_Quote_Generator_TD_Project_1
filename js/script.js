@@ -59,21 +59,20 @@ const usedArray = [];
 
 function getRandomQuote() {
   //Stores a random number between 0 and length of quotes array
-  let randomNum = Math.floor((Math.random() * quotes.length)+1);
+  let randomNum = Math.floor((Math.random() * quotes.length));
 
   //Sets up an infinite loop to keep assigning a random number until no duplicates are returned
   while(true) {
     // Checks to see if random number has already been used. Additional check to shift to the next else if
     if(usedArray.includes(randomNum) && usedArray.length != quotes.length) {
-      randomNum = Math.floor((Math.random() * quotes.length)+1);
+      randomNum = Math.floor((Math.random() * quotes.length));
     } else if(usedArray.length === quotes.length) {
       //If all quotes have been displayed, this resets the usedArray so the quotes can start showing randomly again
       usedArray.length = 0;
     } else {
       //Finally if the random num doesn't match any that have already gone, it returns that num and pushes it to the usedArray
-      //Also shifts num returned down 1 due to reading from an array in printQuote
       usedArray.push(randomNum);
-      return quotes[randomNum - 1];
+      return quotes[randomNum];
     }
   }
 }
