@@ -21,3 +21,11 @@ First it stores a random number then sets up an infinite loop to check if the nu
 Once the usedArray's length is equal to the quotes' array's length, the usedArray gets reset to recycle the quotes.
 
 Each call to getRandomQuote returns a new quote object to be used in printQuote().
+
+# randomColorChange()
+
+A function that generates a random color based on rgb values
+
+Code was adapted from https://www.w3resource.com/javascript-exercises/javascript-math-exercise-40.php
+
+Each R/G/B value was calculated by `Math.random()` and `Math.floor()` and then returned by concatenating the values into a `rgb()` string to be fed into printQuote. 

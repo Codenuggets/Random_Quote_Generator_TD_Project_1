@@ -79,6 +79,7 @@ function getRandomQuote() {
 }
 
 console.log(getRandomQuote());
+
 //Code adapted from https://www.w3resource.com/javascript-exercises/javascript-math-exercise-40.php
 //Generates Random Color to be generated for use in changing background for each quote
 function randomColorChange(){
