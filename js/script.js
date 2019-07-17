@@ -20,45 +20,42 @@ const quotes = [
     source: "Old Man",
     citation: "The Legend of Zelda",
     year: 1987,
-    category: "Video Games"
+    tags: ["Video Games", "Nintendo"]
   },
   {
     quote: "I am the wisest man alive, for I know one thing, and that is that I know nothing.",
     source: "Socrates",
     citation: "",
-    category: "Philosophy"
+    year: null,
+    tags: ["Philosophy"]
   },
   {
-    quote: "3",
-    source: "3" ,
-    citation: "",
-    //year: ,
-    category: ""
+    quote: "We all make choices in life, but in the end our choices make us.",
+    source: "Andrew Ryan" ,
+    citation: "Bioshock",
+    year: 2007,
+    tags: ["Video Games"]
   },
   {
-    quote: "4",
-    source: "4",
-    citation: "",
-    //year:,
-    category: ""
+    quote: "Do or do not, there is no try",
+    source: "Yoda",
+    citation: "Star Wars: The Empire Strikes Back",
+    year: 1980,
+    tags: ["Movies", "Sci fi"]
   },
   {
-    quote: "5",
-    source: "5",
+    quote: "Do the difficult things while they are easy and do the great things while they are small. A journey of a thousand miles must begin with a single step.",
+    source: "Lao Tzu",
     citation: "",
-  //  year:,
-    category: ""
+    year: "4th Century BC",
+    tags: ["Philosophy"]
   }
 ]
 
+console.log(quotes);
+
 //Sets a variable to be stored outside of getRandomQuote to reflect which quotes have already been displayed
 const usedArray = [];
-
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
 
 function getRandomQuote() {
   //Stores a random number between 0 and length of quotes array
@@ -74,31 +71,43 @@ function getRandomQuote() {
       usedArray.length = 0;
     } else {
       //Finally if the random num doesn't match any that have already gone, it returns that num and pushes it to the usedArray
+      //Also shifts num returned down 1 due to reading from an array in printQuote
       usedArray.push(randomNum);
-      return randomNum;
+      return quotes[randomNum - 1];
     }
   }
 }
 
+console.log(getRandomQuote());
 
-
-/***
-  Create the `printQuote` function to:
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string.
-***/
 
 function printQuote() {
-
+  let randomQuote = getRandomQuote();
+  let htmlString = "";
+  //Set the quote and scource in html string using template literals
+  htmlString += `<p class="quote">${randomQuote.quote}</p>
+  <p class="source">${randomQuote.source}`
+  //Checks to see if there's a citation and inserts if it's true
+  if(randomQuote.citation) {
+    htmlString += `<span class="citation">${randomQuote.citation}</span>`;
+  }
+  //Checks to see if there's a year and inserts if true
+  if(randomQuote.year){
+    htmlString += `<span class="year">${randomQuote.year}</span>`;
+  }
+  if(randomQuote.tags){
+    //Iterates through the tags list and inserts each one
+    for(tag of randomQuote.tags){
+      htmlString += `<span class="citation">${tag}</span>`;
+    }
+  }
+  //Closes the 'p' tag from orignally setting it with the source and turns the quote box inner html to the html string
+  htmlString += "</p>"
+  document.getElementById("quote-box").innerHTML = htmlString;
 }
 
+//initializes the screen with a quote, so it doesn't start blank
+printQuote();
 
 /***
   When the "Show another quote" button is clicked, the event listener
