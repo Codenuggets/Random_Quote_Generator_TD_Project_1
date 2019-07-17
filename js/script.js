@@ -19,35 +19,40 @@ const quotes = [
     quote: "It's dangerous to go alone! Take This!",
     source: "Old Man",
     citation: "The Legend of Zelda",
-    year: 1987
+    year: 1987,
+    category: "Video Games"
   },
   {
     quote: "I am the wisest man alive, for I know one thing, and that is that I know nothing.",
     source: "Socrates",
-    citation: ,
-    year:
+    citation: "",
+    category: "Philosophy"
   },
   {
-    quote: "",
-    source: ,
-    citation: ,
-    year:
+    quote: "3",
+    source: "3" ,
+    citation: "",
+    //year: ,
+    category: ""
   },
   {
-    quote: "",
-    source: ,
-    citation: ,
-    year:
+    quote: "4",
+    source: "4",
+    citation: "",
+    //year:,
+    category: ""
   },
   {
-    quote: "",
-    source: ,
-    citation: ,
-    year:
-  },
+    quote: "5",
+    source: "5",
+    citation: "",
+  //  year:,
+    category: ""
+  }
 ]
 
-
+//Sets a variable to be stored outside of getRandomQuote to reflect which quotes have already been displayed
+const usedArray = [];
 
 /***
   Create the `getRandomQuote` function to:
@@ -55,6 +60,25 @@ const quotes = [
    - Cse the random number to `return` a random quote object from the `quotes` array.
 ***/
 
+function getRandomQuote() {
+  //Stores a random number between 0 and length of quotes array
+  let randomNum = Math.floor((Math.random() * quotes.length)+1);
+
+  //Sets up an infinite loop to keep assigning a random number until no duplicates are returned
+  while(true) {
+    // Checks to see if random number has already been used. Additional check to shift to the next else if
+    if(usedArray.includes(randomNum) && usedArray.length != quotes.length) {
+      randomNum = Math.floor((Math.random() * quotes.length)+1);
+    } else if(usedArray.length === quotes.length) {
+      //If all quotes have been displayed, this resets the usedArray so the quotes can start showing randomly again
+      usedArray.length = 0;
+    } else {
+      //Finally if the random num doesn't match any that have already gone, it returns that num and pushes it to the usedArray
+      usedArray.push(randomNum);
+      return randomNum;
+    }
+  }
+}
 
 
 
@@ -71,7 +95,9 @@ const quotes = [
    - Set the `innerHTML` of the `quote-box` div to the HTML string.
 ***/
 
+function printQuote() {
 
+}
 
 
 /***
@@ -82,6 +108,3 @@ const quotes = [
 ***/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
